@@ -33,6 +33,7 @@ class Engine {
     let timeDiff = new Date().getTime() - this.lastFrame;
 
     this.lastFrame = new Date().getTime();
+
     // We use the number of milliseconds since the last call to gameLoop to update the enemy positions.
     // Furthermore, if any enemy is below the bottom of our game, its destroyed property will be set. (See Enemy.js)
     this.enemies.forEach((enemy) => {
@@ -56,8 +57,20 @@ class Engine {
 
     // We check if the player is dead. If he is, we alert the user
     // and return from the method (Why is the return statement important?)
+
+    // if (this.isPlayerDead === false) {
+    //   this.score = document.createElement('p');
+    //   this.score.innerText = `${score}`;
+    //   this.score.className = 'score';
+    //   this.root.appendChild(this.score);
+    // }
+
     if (this.isPlayerDead()) {
-      window.alert('Game over');
+      // window.alert('Game over');
+      this.gameOver = document.createElement('p');
+      this.gameOver.innerText = `GAME OVER`;
+      this.gameOver.className = 'gameOver';
+      this.root.appendChild(this.gameOver);
       return;
     }
 
@@ -68,6 +81,28 @@ class Engine {
   // This method is not implemented correctly, which is why
   // the burger never dies. In your exercises you will fix this method.
   isPlayerDead = () => {
-    return false;
+    let isCollision = false;
+    
+    this.enemies.forEach((enemy) => {
+      if (enemy.x === this.player.x && enemy.y >= (GAME_HEIGHT - PLAYER_HEIGHT)) {
+        isCollision = true;
+      }
+    })
+    return isCollision;
   };
 }
+
+isPlayerAlive = () => {
+  return false;
+}
+
+// score = () => {
+//   let score;
+//  // while (this.isPlayerAlive()) {
+//  //   score = score++;
+//  // }
+//   this.score = document.createElement('p');
+//   this.score.innerText = `${score}`;
+//   this.score.className = 'score';
+//   this.root.appendChild(this.score);
+// }

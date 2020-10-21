@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    font-family: 'Anton', sans-serif;
+}
+
+/* body {
+    width: 750px;
+    margin: 0 auto;
+    border: 2px solid red;
+} */
+
+.gameOver {
+    color: red;
+    position: absolute;
+    font-weight: bold;
+    font-size: 3rem;
+    /* display: flex; */
+    top: 220px;
+    right: 0;
+    bottom: 0;
+    left: 250px;
+    /* align-items: center;
+    justify-content: center; */
+}
+
+.score {
+    color: white;
+    position: absolute;
+    top: 0;
+}
