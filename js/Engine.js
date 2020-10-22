@@ -14,6 +14,11 @@ class Engine {
     // Initially, we have no enemies in the game. The enemies property refers to an array
     // that contains instances of the Enemy class
     this.enemies = [];
+
+    this.startTime = null;
+    this.score = new Text(this.root, 10, 10);
+    // this.highscore = 0;
+    this.score.update(this.highscore);
     // We add the background image to the game
     addBackground(this.root);
   }
@@ -23,6 +28,12 @@ class Engine {
   //  - Detects a collision between the player and any enemy
   //  - Removes enemies that are too low from the enemies array
   gameLoop = () => {
+    if (this.startTime === null) {
+      this.startTime = new Date().getTime();
+    }
+
+    this.currentTime = new Date().getTime();
+    this.score.update(Math.floor((this.currentTime - this.startTime) * 5));
     // This code is to see how much time, in milliseconds, has elapsed since the last
     // time this method was called.
     // (new Date).getTime() evaluates to the number of milliseconds since January 1st, 1970 at midnight.
@@ -31,7 +42,6 @@ class Engine {
     }
 
     let timeDiff = new Date().getTime() - this.lastFrame;
-
     this.lastFrame = new Date().getTime();
 
     // We use the number of milliseconds since the last call to gameLoop to update the enemy positions.
@@ -58,13 +68,6 @@ class Engine {
     // We check if the player is dead. If he is, we alert the user
     // and return from the method (Why is the return statement important?)
 
-    // if (this.isPlayerDead === false) {
-    //   this.score = document.createElement('p');
-    //   this.score.innerText = `${score}`;
-    //   this.score.className = 'score';
-    //   this.root.appendChild(this.score);
-    // }
-
     if (this.isPlayerDead()) {
       // window.alert('Game over');
       this.gameOver = document.createElement('p');
@@ -76,6 +79,7 @@ class Engine {
 
     // If the player is not dead, then we put a setTimeout to run the gameLoop in 20 milliseconds
     setTimeout(this.gameLoop, 20);
+    // setTimeout(this.scoreCounter, 20);
   };
 
   // This method is not implemented correctly, which is why
@@ -91,18 +95,3 @@ class Engine {
     return isCollision;
   };
 }
-
-isPlayerAlive = () => {
-  return false;
-}
-
-// score = () => {
-//   let score;
-//  // while (this.isPlayerAlive()) {
-//  //   score = score++;
-//  // }
-//   this.score = document.createElement('p');
-//   this.score.innerText = `${score}`;
-//   this.score.className = 'score';
-//   this.root.appendChild(this.score);
-// }
