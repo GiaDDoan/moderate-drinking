@@ -3,28 +3,65 @@
     font-family: 'Anton', sans-serif;
 }
 
-/* body {
-    width: 750px;
-    margin: 0 auto;
-    border: 2px solid red;
-} */
+/* Main body + App body */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+#app {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+/* CHARACTERS */
+.playerChar {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    width: 75px;
+    height: 54px;
+}
+
+/* SCORE */
+.score {
+    display: none;
+    position: absolute;
+    color: white;
+    font: bold 30px Impact;
+    z-index: 2000;
+}
+
+/* BUTTONS */
+.allButtons {
+    position: absolute;
+}
+
+.startGame {
+    color: yellow;
+    font-weight: bold;
+    font-size: 1.3em;
+    background-color: transparent;
+    padding: 1.2em 3em;
+}
+
+.restartGame {
+    display: none;
+    color: yellow;
+    font-weight: bold;
+    font-size: 1.3em;
+    background-color: transparent;
+    padding: 1.2em 2.3em;
+}
+
+/* ENDING SCREEN */
 .gameOver {
     color: red;
     position: absolute;
     font-weight: bold;
     font-size: 3rem;
-    /* display: flex; */
-    top: 220px;
-    right: 0;
-    bottom: 0;
-    left: 250px;
-    /* align-items: center;
-    justify-content: center; */
-}
-
-.score {
-    color: white;
-    position: absolute;
-    top: 0;
+    top: 30%;
 }

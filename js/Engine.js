@@ -14,11 +14,13 @@ class Engine {
     // Initially, we have no enemies in the game. The enemies property refers to an array
     // that contains instances of the Enemy class
     this.enemies = [];
-
     this.startTime = null;
     this.score = new Text(this.root, 10, 10);
+    this.live = new Text(this.root, 725, 10);
+    this.numberOfLives = 3;
+    this.invincible = false;
     // this.highscore = 0;
-    this.score.update(this.highscore);
+    this.score.update(0);
     // We add the background image to the game
     addBackground(this.root);
   }
@@ -28,12 +30,17 @@ class Engine {
   //  - Detects a collision between the player and any enemy
   //  - Removes enemies that are too low from the enemies array
   gameLoop = () => {
+    // SCORE COUNTER
     if (this.startTime === null) {
       this.startTime = new Date().getTime();
+      this.live.update(`Lives: ${this.numberOfLives}`);
     }
 
     this.currentTime = new Date().getTime();
     this.score.update(Math.floor((this.currentTime - this.startTime) * 5));
+
+    // LIFE COUNTER
+    
     // This code is to see how much time, in milliseconds, has elapsed since the last
     // time this method was called.
     // (new Date).getTime() evaluates to the number of milliseconds since January 1st, 1970 at midnight.
@@ -68,18 +75,33 @@ class Engine {
     // We check if the player is dead. If he is, we alert the user
     // and return from the method (Why is the return statement important?)
 
-    if (this.isPlayerDead()) {
+    if (this.isPlayerDead() && !this.invincible) {
       // window.alert('Game over');
-      this.gameOver = document.createElement('p');
-      this.gameOver.innerText = `GAME OVER`;
-      this.gameOver.className = 'gameOver';
-      this.root.appendChild(this.gameOver);
-      return;
+      if (this.numberOfLives > 1) {
+        this.numberOfLives -= 1;
+        this.live.update(`Lives: ${this.numberOfLives}`);
+        this.invincible = true;
+        setTimeout(() => {
+          this.invincible = false;
+          console.log('No longer invincible');
+        }, 2000)
+      } else {
+        this.gameOver = document.createElement('p');
+        this.gameOver.innerText = `GAME OVER`;
+        this.gameOver.className = 'gameOver';
+        this.root.appendChild(this.gameOver);
+        restartButton.style.display = 'block';
+        return
+      };
     }
 
+    if (this.invincible) {
+      this.player.domElement.style.border = 'red 2px solid';
+    } else {
+      this.player.domElement.style.border = 'none';
+    }
     // If the player is not dead, then we put a setTimeout to run the gameLoop in 20 milliseconds
     setTimeout(this.gameLoop, 20);
-    // setTimeout(this.scoreCounter, 20);
   };
 
   // This method is not implemented correctly, which is why
@@ -88,10 +110,14 @@ class Engine {
     let isCollision = false;
     
     this.enemies.forEach((enemy) => {
-      if (enemy.x === this.player.x && enemy.y >= (GAME_HEIGHT - PLAYER_HEIGHT)) {
+      if (enemy.x === this.player.x && enemy.y >= (GAME_HEIGHT - PLAYER_HEIGHT - ENEMY_HEIGHT)) {
         isCollision = true;
       }
     })
     return isCollision;
   };
+  restart = () => {
+    this.score.update(0);
+    this.numberOfLives = 3;
+  }
 }

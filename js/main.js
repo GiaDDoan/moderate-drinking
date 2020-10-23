@@ -1,6 +1,9 @@
 // We create an instance of the Engine class. Looking at our index.html,
 // we see that it has a div with an id of `"app"`
 const gameEngine = new Engine(document.getElementById('app'));
+const startButton = document.querySelector('.startGame');
+const restartButton = document.querySelector('.restartGame');
+
 
 // keydownHandler is a variable that refers to a function. The function has one parameter
 // (does the parameter name matter?) which is called event. As we will see below, this function
@@ -24,4 +27,16 @@ const keydownHandler = (event) => {
 document.addEventListener('keydown', keydownHandler);
 
 // We call the gameLoop method to start the game
-gameEngine.gameLoop();
+// gameEngine.gameLoop();
+startButton.addEventListener('click', () => {
+  startButton.style.display = 'none';
+  gameEngine.player.domElement.style.display = 'block';
+  gameEngine.score.domElement.style.display = 'block';
+  gameEngine.live.domElement.style.display = 'block';
+  gameEngine.gameLoop();
+});
+
+restartButton.addEventListener('click', () => {
+  gameEngine.restart()
+  gameEngine.gameLoop();
+})

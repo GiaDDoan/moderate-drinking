@@ -7,12 +7,13 @@ class Text {
     // set the \`domElement\` property of the instance to the newly created DOM element so we can update it later
     const div = document.createElement('div');
 
-    div.style.position = 'absolute';
+    // div.style.position = 'absolute';
     div.style.left = xPos;
     div.style.top = yPos;
-    div.style.color = 'white';
-    div.style.font = 'bold 30px Impact';
-    div.style.zIndex = 2000;
+    // div.style.color = 'white';
+    // div.style.font = 'bold 30px Impact';
+    // div.style.zIndex = 2000;
+    div.className = 'score';
 
     root.appendChild(div);
 
