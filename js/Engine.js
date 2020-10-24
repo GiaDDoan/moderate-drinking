@@ -16,7 +16,7 @@ class Engine {
     this.enemies = [];
     this.startTime = null;
     this.score = new Text(this.root, 10, 10);
-    this.live = new Text(this.root, 725, 10);
+    this.live = new Text(this.root, 580, 10);
     this.numberOfLives = 3;
     this.invincible = false;
     // this.highscore = 0;
@@ -33,11 +33,13 @@ class Engine {
     // SCORE COUNTER
     if (!this.startTime) {
       this.startTime = new Date().getTime();
-      this.live.update(`Lives: ${this.numberOfLives}`);
+      this.live.update(`Drinks until drunk: ${this.numberOfLives}`);
     }
 
     this.currentTime = new Date().getTime();
-    this.score.update(Math.floor((this.currentTime - this.startTime) * 5));
+    // this.score.update(Math.floor((this.currentTime - this.startTime) * 0.02));
+    let scoreResult = Math.floor((this.currentTime - this.startTime) * 0.02);
+    this.score.update(`Soberity level: \n ${scoreResult}`);
     
     // This code is to see how much time, in milliseconds, has elapsed since the last
     // time this method was called.
@@ -77,7 +79,7 @@ class Engine {
       // window.alert('Game over');
       if (this.numberOfLives > 1) {
         this.numberOfLives -= 1;
-        this.live.update(`Lives: ${this.numberOfLives}`);
+        this.live.update(`Drinks until drunk: ${this.numberOfLives}`);
         this.invincible = true;
         setTimeout(() => {
           this.invincible = false;

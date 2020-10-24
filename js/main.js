@@ -3,6 +3,8 @@
 const gameEngine = new Engine(document.getElementById('app'));
 const startButton = document.querySelector('.startGame');
 const restartButton = document.querySelector('.restartGame');
+const background = document.querySelector('.background');
+background.src = 'images/office.png'; //BACKGROUND
 
 
 // keydownHandler is a variable that refers to a function. The function has one parameter
@@ -36,6 +38,7 @@ startButton.addEventListener('click', () => {
   gameEngine.score.domElement.style.display = 'block';
   gameEngine.live.domElement.style.display = 'block';
   gameEngine.gameLoop();
+  background.src = 'images/background.jpg'; //BACKGROUND
 });
 
 restartButton.addEventListener('click', () => {

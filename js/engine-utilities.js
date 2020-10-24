@@ -41,6 +41,7 @@ const nextEnemySpot = (enemies) => {
 const addBackground = (root) => {
   // We create a new img DOM node.
   const bg = document.createElement('img');
+  bg.setAttribute('class', 'background');
 
   // We set its src attribute and the height and width CSS attributes
   // bg.src = 'images/stars.png';
