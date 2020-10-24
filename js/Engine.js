@@ -31,15 +31,13 @@ class Engine {
   //  - Removes enemies that are too low from the enemies array
   gameLoop = () => {
     // SCORE COUNTER
-    if (this.startTime === null) {
+    if (!this.startTime) {
       this.startTime = new Date().getTime();
       this.live.update(`Lives: ${this.numberOfLives}`);
     }
 
     this.currentTime = new Date().getTime();
     this.score.update(Math.floor((this.currentTime - this.startTime) * 5));
-
-    // LIFE COUNTER
     
     // This code is to see how much time, in milliseconds, has elapsed since the last
     // time this method was called.
@@ -87,10 +85,13 @@ class Engine {
         }, 2000)
       } else {
         this.gameOver = document.createElement('p');
-        this.gameOver.innerText = `GAME OVER`;
+        this.gameOver.innerText = `WASTED`;
         this.gameOver.className = 'gameOver';
         this.root.appendChild(this.gameOver);
         restartButton.style.display = 'block';
+        this.player.domElement.src = 'images/cat1.png';
+        this.player.domElement.className = 'catChar';
+        document.removeEventListener('keydown', keydownHandler);
         return
       };
     }
@@ -117,6 +118,7 @@ class Engine {
     return isCollision;
   };
   restart = () => {
+    this.startTime = null;
     this.score.update(0);
     this.numberOfLives = 3;
   }

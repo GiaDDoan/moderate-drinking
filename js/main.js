@@ -14,12 +14,14 @@ const keydownHandler = (event) => {
   // key is left, then we call the moveLeft method of gameEngine.player (where is this method defined?)
   if (event.code === 'ArrowLeft') {
     gameEngine.player.moveLeft();
+    gameEngine.player.domElement.className = 'turnLeft';
   }
 
   // If `event.code` is the string that represents a right arrow keypress,
   // then move our hamburger to the right
   if (event.code === 'ArrowRight') {
     gameEngine.player.moveRight();
+    gameEngine.player.domElement.className = 'turnRight';
   }
 };
 
@@ -39,4 +41,9 @@ startButton.addEventListener('click', () => {
 restartButton.addEventListener('click', () => {
   gameEngine.restart()
   gameEngine.gameLoop();
-})
+  restartButton.style.display = 'none';
+  gameEngine.gameOver.style.display = 'none';
+  gameEngine.player.domElement.src = 'images/male_char_1.png';
+  gameEngine.player.domElement.className = 'playerChar';
+  document.addEventListener('keydown', keydownHandler);
+});

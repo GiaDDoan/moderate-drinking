@@ -16,8 +16,8 @@ class Player {
     // We create a DOM node. We will be updating the DOM node every time we move the player, so we store a reference to the
     // DOM node in a property.
     this.domElement = document.createElement('img');
-    this.domElement.src = 'images/player.png';
-    // this.domElement.src = 'images/male_char.png';
+    // this.domElement.src = 'images/player.png';
+    this.domElement.src = 'images/male_char_1.png';
     // this.domElement.style.position = 'absolute';
     this.domElement.style.left = `${this.x}px`;
     this.domElement.style.top = ` ${y}px`;
@@ -42,5 +42,6 @@ class Player {
       this.x = this.x + PLAYER_WIDTH;
     }
     this.domElement.style.left = `${this.x}px`;
+    // this.domElement.className = 'turnRight';
   }
 }
