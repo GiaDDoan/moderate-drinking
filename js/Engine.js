@@ -16,8 +16,8 @@ class Engine {
     this.enemies = [];
     this.startTime = null;
     this.score = new Text(this.root, 10, 10);
-    this.live = new Text(this.root, 580, 10);
-    this.numberOfLives = 3;
+    this.live = new Text(this.root, 550, 10);
+    this.numberOfLives = 5;
     this.invincible = false;
     // this.highscore = 0;
     this.score.update(0);
@@ -37,9 +37,8 @@ class Engine {
     }
 
     this.currentTime = new Date().getTime();
-    // this.score.update(Math.floor((this.currentTime - this.startTime) * 0.02));
-    let scoreResult = Math.floor((this.currentTime - this.startTime) * 0.02);
-    this.score.update(`Soberity level: \n ${scoreResult}`);
+    let scoreCounter = Math.floor((this.currentTime - this.startTime) * 0.02);
+    this.score.update(`Soberity level: \n ${scoreCounter}`);
     
     // This code is to see how much time, in milliseconds, has elapsed since the last
     // time this method was called.

@@ -1,3 +1,10 @@
+:root {
+    --player-width: 100px;
+    --player-height: 100px;
+    --bottle-width: 100px;
+    --bottle-height: 120px;
+}
+
 * {
     margin: 0;
     font-family: 'Anton', sans-serif;
@@ -9,13 +16,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: lightgray;
+    background-image: url(./images/city6.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-color: lightgray; */
 }
 
 #app {
     position: relative;
     display: flex;
     justify-content: center;
+    overflow: hidden;
 }
 
 /* CHARACTERS */
@@ -23,14 +34,16 @@ body {
     display: none;
     position: absolute;
     z-index: 10;
-    width: 75px;
-    height: 54px;
+    width: 100px;
+    /* height: 54px; */
+    height: 100px;
 }
 
 .catChar {
     display: none;
     position: absolute;
     z-index: 10;
+    margin-top: 40px;
     width: 50px;
     height: 35px;
 }
@@ -41,8 +54,8 @@ body {
     display: none;
     position: absolute;
     z-index: 10;
-    width: 75px;
-    height: 54px;
+    width: var(--player-width);
+    height: var(--player-height);
 }
 
 .turnLeft {
@@ -51,15 +64,15 @@ body {
     display: none;
     position: absolute;
     z-index: 10;
-    width: 75px;
-    height: 54px;
+    width: var(--player-width);
+    height: var(--player-height);
 }
 
 /* FALLING OBJECTS */
 
 .bottle {
-    height: 156;
-    width: 75;
+    height: var(--bottle-height);
+    width: var(--bottle-width);
 }
 
 /* SCORE */

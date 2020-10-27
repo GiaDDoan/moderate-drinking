@@ -58,11 +58,11 @@ const addBackground = (root) => {
   const whiteBox = document.createElement('div');
 
   // We put a high z-index so that the div is placed over all other DOM nodes
-  whiteBox.style.zIndex = 100;
-  whiteBox.style.position = 'absolute';
-  whiteBox.style.top = `${GAME_HEIGHT}px`;
-  whiteBox.style.height = `${ENEMY_HEIGHT}px`;
-  whiteBox.style.width = `${GAME_WIDTH}px`;
-  whiteBox.style.background = '#fff';
-  root.append(whiteBox);
+  // whiteBox.style.zIndex = 100;
+  // whiteBox.style.position = 'absolute';
+  // whiteBox.style.top = `${GAME_HEIGHT}px`;
+  // whiteBox.style.height = `${ENEMY_HEIGHT}px`;
+  // whiteBox.style.width = `${GAME_WIDTH}px`;
+  // whiteBox.style.background = 'black';
+  // root.append(whiteBox);
 };

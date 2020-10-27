@@ -36,7 +36,10 @@ class Enemy {
     this.domElement = document.createElement('img');
 
     // We give it a src attribute to specify which image to display.
-    this.domElement.src = './images/whiskey.png';
+    this.allBottles = ['./images/whiskey.png', './images/beer1.png', './images/wine1.png', './images/sake1.png' ,'./images/water.png'];
+    let randomNumber = Math.floor(Math.random() * 5);
+    // this.domElement.src = './images/whiskey.png';
+    this.domElement.src = this.allBottles[randomNumber];
     // We modify the CSS style of the DOM node.
     this.domElement.style.position = 'absolute';
     this.domElement.style.left = `${this.x}px`;
@@ -47,7 +50,9 @@ class Enemy {
 
     // Show that the user can actually see the img DOM node, we append it to the root DOM node.
     theRoot.appendChild(this.domElement);
-    this.speed = Math.random() / 2 + 0.25;
+    // this.speed = Math.random() / 2 + 0.25;
+    this.speed = Math.random() / 200 + 0.25;
+
   }
 
   // We set the speed property of the enemy. This determines how fast it moves down the screen.
