@@ -67,10 +67,10 @@ const addBackground = (root) => {
   // root.append(whiteBox);
 };
 
-// const cloud1 = (root) => {
-//   let cloud = document.createElement('img');
-//   cloud.setAttribute('class', 'cloud');
-//   cloud.src = 'images/cloud_final.png';
-//   root.append(cloud);
-// }
+const cloud1 = (root) => {
+  let cloud = document.createElement('img');
+  cloud.setAttribute('class', 'cloud');
+  cloud.src = 'images/cloud_final.png';
+  root.append(cloud);
+}
 

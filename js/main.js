@@ -29,6 +29,17 @@ const keydownHandler = (event) => {
   }
 };
 
+const keydownHandlerReverse = (event) => {
+  if (event.code === 'ArrowRight') {
+    gameEngine.player.moveLeft();
+    gameEngine.player.domElement.className = 'turnLeft';
+  }
+  if (event.code === 'ArrowLeft') {
+    gameEngine.player.moveRight();
+    gameEngine.player.domElement.className = 'TurnRight';
+  }
+}
+
 // We add an event listener to document. document the ancestor of all DOM nodes in the DOM.
 document.addEventListener('keydown', keydownHandler);
 

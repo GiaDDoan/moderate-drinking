@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 :root {
     --player-width: 100px;
     --player-height: 100px;
@@ -30,11 +32,16 @@ body {
 
 /* GAME NAME */
 .gameName {
+    /* font-family: 'Architects Daughter', cursive; */
+    /* font-family: 'Shadows Into Light', cursive; */
+    font-family: 'Indie Flower', cursive;
     position: absolute;
     color: black;
-    top: 22%;
+    top: 21%;
     left: 24%;
     transform: rotate(-11.5deg);
+    font-size: 2.5em;
+    font-weight: bold;
 }
 
 .postIt {
@@ -137,11 +144,68 @@ body {
     z-index: 3000;
 }
 
-.cloud {
+/* DRUNKNESS */
+/* .cloud {
     z-index: 2000;
     position: absolute;
     height: 16.5vh;
     top: 92;
+    height: 20.1vh;
+    display: none;
+} */
+
+.drunkText {
+    position: absolute;
+    font-size: 3em;
+    letter-spacing: 2px;
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    padding: 0 20px;
+}
+
+.reverseMoveText {
+    color: white;
+    top: 13%;
+    left: 0.4%;
+    transform: rotate(-30deg);
+    animation: glowMove 1s ease-in-out infinite alternate;
+}
+
+@keyframes glowMove {
+    from {
+        text-shadow: 0 0 5px #c00606, 0 0 10px #c00606, 0 0 15px #c00606, 0 0 20px #c00606, 0 0 25px #c00606, 0 0 30px #c00606, 0 0 35px #c00606;
+    }
+    to {
+        text-shadow: 0 0 10px #c00606, 0 0 20px #c00606, 0 0 30px #c00606, 0 0 40px #c00606, 0 0 50px #c00606, 0 0 60px #c00606, 0 0 70px #c00606;
+    }
+}
+
+.cloudText {
+    /* position: absolute; */
+    top: 3%;
+    left: 30%;
+    transform: rotate(-7deg);
+    color: #fff;
+    animation: glowCloud 1s ease-in-out infinite alternate;
+}
+
+@keyframes glowCloud {
+    from {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6, 0 0 25px #0073e6, 0 0 30px #0073e6, 0 0 35px #0073e6;
+    }
+    to {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #0073e6, 0 0 40px #0073e6, 0 0 50px #0073e6, 0 0 60px #0073e6, 0 0 70px #0073e6;
+    }
+}
+
+
+
+
+.cloud {
+    z-index: 2000;
+    position: absolute;
+    height: 16.5vh;
+    top: -5%;
     height: 20.1vh;
     display: none;
 }

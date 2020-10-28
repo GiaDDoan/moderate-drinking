@@ -23,6 +23,7 @@ class Engine {
     this.score.update(0);
     // We add the background image to the game
     addBackground(this.root);
+    cloud1(this.root);
   }
 
   // The gameLoop will run every few milliseconds. It does several things
@@ -128,9 +129,30 @@ class Engine {
       this.player.domElement.style.border = 'none';
     }
 
-    if (this.numberOfLives === 4){
-      cloudDrunk.style.display = 'block';
+    //Drunkness disbilities
+    if (this.numberOfLives <= 4){
+      document.removeEventListener('keydown', keydownHandler);
+      document.addEventListener('keydown', keydownHandlerReverse);
+    } else {
+      document.removeEventListener('keydown', keydownHandlerReverse);
+      document.addEventListener('keydown', keydownHandler);
     }
+
+    if (this.numberOfLives <= 3){
+      cloudDrunk.style.display = 'block';
+    } else {
+      cloudDrunk.style.display = 'none';
+    }
+    // if (this.numberOfLives <= 4) {
+    //   document.removeEventListener('keydown', keydownHandler);
+    //   document.addEventListener('keydown', keydownHandlerReverse);
+    // } else if (this.numberOfLives <= 3){
+    //   cloudDrunk.style.display = 'block';
+    // } else {
+    //   cloudDrunk.style.display = 'none';
+    // }
+
+
     // If the player is not dead, then we put a setTimeout to run the gameLoop in 20 milliseconds
     setTimeout(this.gameLoop, 20);
   };
@@ -151,7 +173,7 @@ class Engine {
     this.startTime = null;
     this.score.update(0);
     this.numberOfLives = 5;
-    cloudDrunk.style.display = 'none';
+    // cloudDrunk.style.display = 'none';
     this.invincible = true;
     setTimeout(() => {
       this.invincible = false;
