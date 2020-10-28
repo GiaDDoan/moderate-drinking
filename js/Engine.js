@@ -16,7 +16,7 @@ class Engine {
     this.enemies = [];
     this.startTime = null;
     this.score = new Text(this.root, 10, 10);
-    this.live = new Text(this.root, 550, 10);
+    this.live = new Text(this.root, 810, 10);
     this.numberOfLives = 5;
     this.invincible = false;
     // this.highscore = 0;
@@ -31,9 +31,9 @@ class Engine {
   //  - Removes enemies that are too low from the enemies array
   gameLoop = () => {
     // SCORE COUNTER
+    this.live.update(`Drinks until blackout: \n ${this.numberOfLives}`);
     if (!this.startTime) {
       this.startTime = new Date().getTime();
-      this.live.update(`Drinks until drunk: ${this.numberOfLives}`);
     }
 
     this.currentTime = new Date().getTime();
@@ -52,9 +52,25 @@ class Engine {
 
     // We use the number of milliseconds since the last call to gameLoop to update the enemy positions.
     // Furthermore, if any enemy is below the bottom of our game, its destroyed property will be set. (See Enemy.js)
+    let speedCounter = timeDiff + scoreCounter + 2000; //Default +1000
+
     this.enemies.forEach((enemy) => {
-      enemy.update(timeDiff);
-    });
+      if (scoreCounter < 100){
+        enemy.update((speedCounter) / 100);
+      } else if (scoreCounter < 200) {
+        enemy.update((speedCounter) / 90);
+      } else if (scoreCounter < 300){
+        enemy.update((speedCounter) / 70)
+      } else if (scoreCounter < 500){
+        enemy.update((speedCounter) / 60)
+      } else if (scoreCounter < 1000) {
+        enemy.update((speedCounter)/ 50);
+      } else if (scoreCounter < 2000) {
+        enemy.update((speedCounter)/ 45);
+      } else {
+        enemy.update((speedCounter)/ 40);
+      }
+    })
 
     // We remove all the destroyed enemies from the array referred to by \`this.enemies\`.
     // We use filter to accomplish this.
@@ -75,8 +91,15 @@ class Engine {
     // and return from the method (Why is the return statement important?)
 
     if (this.isPlayerDead() && !this.invincible) {
-      // window.alert('Game over');
-      if (this.numberOfLives > 1) {
+      if (this.enemies.forEach((enemy) => {
+        if (enemy.domElement.src === './images/water.png'){
+          return true;
+        }
+      })){
+        this.numberOfLives += 1;
+        this.live.update(`Drinks until drunk: ${this.numberOfLives}`);
+      }
+      else if (this.numberOfLives > 1) {
         this.numberOfLives -= 1;
         this.live.update(`Drinks until drunk: ${this.numberOfLives}`);
         this.invincible = true;
@@ -93,6 +116,8 @@ class Engine {
         this.player.domElement.src = 'images/cat1.png';
         this.player.domElement.className = 'catChar';
         document.removeEventListener('keydown', keydownHandler);
+        this.live.update(`Drinks until blackout: \n Where am I?`);
+        this.invincible = true
         return
       };
     }
@@ -101,6 +126,10 @@ class Engine {
       this.player.domElement.style.border = 'red 2px solid';
     } else {
       this.player.domElement.style.border = 'none';
+    }
+
+    if (this.numberOfLives === 4){
+      cloudDrunk.style.display = 'block';
     }
     // If the player is not dead, then we put a setTimeout to run the gameLoop in 20 milliseconds
     setTimeout(this.gameLoop, 20);
@@ -121,6 +150,12 @@ class Engine {
   restart = () => {
     this.startTime = null;
     this.score.update(0);
-    this.numberOfLives = 3;
+    this.numberOfLives = 5;
+    cloudDrunk.style.display = 'none';
+    this.invincible = true;
+    setTimeout(() => {
+      this.invincible = false;
+      console.log('No longer invincible');
+    }, 2000)
   }
 }

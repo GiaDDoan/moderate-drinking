@@ -4,7 +4,9 @@ const gameEngine = new Engine(document.getElementById('app'));
 const startButton = document.querySelector('.startGame');
 const restartButton = document.querySelector('.restartGame');
 const background = document.querySelector('.background');
+const titleDiv = document.querySelector('.titleDiv');
 background.src = 'images/office.png'; //BACKGROUND
+const cloudDrunk = document.querySelector('.cloud');
 
 
 // keydownHandler is a variable that refers to a function. The function has one parameter
@@ -34,6 +36,7 @@ document.addEventListener('keydown', keydownHandler);
 // gameEngine.gameLoop();
 startButton.addEventListener('click', () => {
   startButton.style.display = 'none';
+  titleDiv.style.display = 'none';
   gameEngine.player.domElement.style.display = 'block';
   gameEngine.score.domElement.style.display = 'block';
   gameEngine.live.domElement.style.display = 'block';

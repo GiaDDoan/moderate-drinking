@@ -19,7 +19,6 @@ body {
     background-image: url(./images/city6.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    /* background-color: lightgray; */
 }
 
 #app {
@@ -27,6 +26,49 @@ body {
     display: flex;
     justify-content: center;
     overflow: hidden;
+}
+
+/* GAME NAME */
+.gameName {
+    position: absolute;
+    color: black;
+    top: 22%;
+    left: 24%;
+    transform: rotate(-11.5deg);
+}
+
+.postIt {
+    position: absolute;
+    top: 9.2%;
+    left: 20.5%;
+}
+
+/* BUTTONS */
+.allButtons {
+    position: absolute;
+}
+
+.startGame {
+    color: rgb(255, 255, 0);
+    font-weight: bold;
+    font-size: 1.3em;
+    background-color: rgba(255, 255, 255, 0.274);
+    padding: 1.2em 3em;
+    z-index: 3000;
+}
+
+.ps {
+    font-size: 0.6em;
+}
+
+.restartGame {
+    display: none;
+    color: yellow;
+    font-weight: bold;
+    font-size: 1.3em;
+    background-color: transparent;
+    padding: 1.2em 2.3em;
+    z-index: 3000;
 }
 
 /* CHARACTERS */
@@ -75,38 +117,15 @@ body {
     width: var(--bottle-width);
 }
 
-/* SCORE */
+/* SCORES */
 .score {
     display: none;
     position: absolute;
     color: white;
     font: bold 30px Impact;
-    z-index: 2000;
+    z-index: 2200;
 }
 
-/* BUTTONS */
-.allButtons {
-    position: absolute;
-}
-
-.startGame {
-    color: yellow;
-    font-weight: bold;
-    font-size: 1.3em;
-    background-color: rgba(255, 255, 255, 0.274);
-    padding: 1.2em 3em;
-    z-index: 3000;
-}
-
-.restartGame {
-    display: none;
-    color: yellow;
-    font-weight: bold;
-    font-size: 1.3em;
-    background-color: transparent;
-    padding: 1.2em 2.3em;
-    z-index: 3000;
-}
 
 /* ENDING SCREEN */
 .gameOver {
@@ -114,7 +133,20 @@ body {
     position: absolute;
     font-weight: bold;
     font-size: 3rem;
-    top: 30%;
+    top: 35%;
     z-index: 3000;
 }
+
+.cloud {
+    z-index: 2000;
+    position: absolute;
+    height: 16.5vh;
+    top: 92;
+    height: 20.1vh;
+    display: none;
+}
+
+
+
+
 
