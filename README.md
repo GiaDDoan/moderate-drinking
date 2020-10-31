@@ -27,3 +27,7 @@ In this world, all the drinks are life sized, you better drink your alcohol mode
 - The character changes when it dies.
 - A restart button to reset the game.
 
+https://moderate-drinking.netlify.app
+
+
+
