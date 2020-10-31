@@ -23,5 +23,7 @@ In this world, all the drinks are life sized, you better drink your alcohol mode
 - A life counter.
 - The gameplay changes each time we lose a life, but it gets reversed back to normal when we gain back a life. (5 changes and the name of the changes appear on top of the screen to tell the user.)
 - The character is following the direction of the arrow key pressed.
+- Invincibility for 2s when hit.
 - The character changes when it dies.
 - A restart button to reset the game.
+
