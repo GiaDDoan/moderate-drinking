@@ -18,6 +18,7 @@ class Enemy {
     // - We need to keep track of the enemy spot so that we don't place two enemies in the same spot.
     this.root = theRoot;
     this.spot = enemySpot;
+    this.hasAlreadyHit = false;
 
     // The x position of the enemy is determined by its width and its spot. We need this information for the lifetime
     // of the instance, so we make it a property of the instance. (Why is this information needed for the lifetime of the instance?)
@@ -36,10 +37,11 @@ class Enemy {
     this.domElement = document.createElement('img');
 
     // We give it a src attribute to specify which image to display.
-    this.allBottles = ['./images/whiskey.png', './images/beer1.png', './images/wine1.png', './images/sake1.png' ,'./images/water.png'];
+    this.allBottles = [WHISKEY, BEER, WINE, SAKE, WATER];
     let randomNumber = Math.floor(Math.random() * 5);
+    this.bottleType = this.allBottles[randomNumber];
     // this.domElement.src = './images/whiskey.png';
-    this.domElement.src = this.allBottles[randomNumber];
+    this.domElement.src = this.bottleType;
     // We modify the CSS style of the DOM node.
     this.domElement.style.position = 'absolute';
     this.domElement.style.left = `${this.x}px`;

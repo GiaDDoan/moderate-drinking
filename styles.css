@@ -5,6 +5,9 @@
     --player-height: 100px;
     --bottle-width: 100px;
     --bottle-height: 120px;
+
+    --game-width: 1100px;
+    --game-height: 680px;
 }
 
 * {
@@ -23,11 +26,41 @@ body {
     background-size: cover;
 }
 
+.lid {
+    position: absolute;
+    width: var(--game-width);
+    height: var(--game-height);
+    background-color: black;
+    display: none;
+    opacity: 0;
+    z-index: 30000;
+    /* animation: closingUp 0.7s ease-in-out alternate infinite; */
+}
+@keyframes closingUp {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
 #app {
     position: relative;
     display: flex;
     justify-content: center;
     overflow: hidden;
+    /* animation: tipsyApp 1s ease-in-out alternate infinite; */
+}
+
+@keyframes tipsyApp {
+    from {
+        transform: rotate(8deg);
+    }
+    to {
+        transform: rotate(-8deg);
+    }
 }
 
 /* GAME NAME */
@@ -88,6 +121,14 @@ body {
     height: 100px;
 }
 
+@keyframes invincibility {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.5;
+    }
+}
 .catChar {
     display: none;
     position: absolute;
@@ -153,7 +194,6 @@ body {
     height: 20.1vh;
     display: none;
 } */
-
 .drunkText {
     position: absolute;
     font-size: 3em;
@@ -163,12 +203,31 @@ body {
     padding: 0 20px;
 }
 
+.tipsyText {
+    color: white;
+    top: 29%;
+    left: 10%;
+    transform: rotate(10deg);
+    animation: glowTipsy 1s ease-in-out infinite alternate;
+    display: none;
+}
+
+@keyframes glowTipsy {
+    from {
+        text-shadow: 0 0 5px #e1ee29, 0 0 10px #e1ee29, 0 0 15px #e1ee29, 0 0 20px #e1ee29, 0 0 25px #e1ee29, 0 0 30px #e1ee29, 0 0 35px #e1ee29;
+    }
+    to {
+        text-shadow: 0 0 10px #e1ee29, 0 0 20px #e1ee29, 0 0 30px #e1ee29, 0 0 40px #e1ee29, 0 0 50px #e1ee29, 0 0 60px #e1ee29, 0 0 70px #e1ee29;
+    }
+}
+
 .reverseMoveText {
     color: white;
     top: 13%;
     left: 0.4%;
     transform: rotate(-30deg);
     animation: glowMove 1s ease-in-out infinite alternate;
+    display: none;
 }
 
 @keyframes glowMove {
@@ -181,15 +240,51 @@ body {
 }
 
 .cloudText {
-    /* position: absolute; */
     top: 3%;
     left: 30%;
     transform: rotate(-7deg);
     color: #fff;
     animation: glowCloud 1s ease-in-out infinite alternate;
+    display: none;
 }
 
 @keyframes glowCloud {
+    from {
+        text-shadow: 0 0 5px #a63bd8, 0 0 10px #a63bd8, 0 0 15px #a63bd8, 0 0 20px #a63bd8, 0 0 25px #a63bd8, 0 0 30px #a63bd8, 0 0 35px #a63bd8;
+    }
+    to {
+        text-shadow: 0 0 10px #a63bd8, 0 0 20px #a63bd8, 0 0 30px #a63bd8, 0 0 40px #a63bd8, 0 0 50px #a63bd8, 0 0 60px #a63bd8, 0 0 70px #a63bd8;
+    }
+}
+
+.reverseScreenText {
+    color: white;
+    top: 3%;
+    left: 60%;
+    transform: rotate(3deg);
+    animation: glowReverse 1s ease-in-out infinite alternate;
+    display: none;
+}
+
+@keyframes glowReverse {
+    from {
+        text-shadow: 0 0 5px rgb(88, 228, 60), 0 0 10px rgb(88, 228, 60), 0 0 15px rgb(88, 228, 60), 0 0 20px rgb(88, 228, 60), 0 0 25px rgb(88, 228, 60), 0 0 30px rgb(88, 228, 60), 0 0 35px rgb(88, 228, 60);
+    }
+    to {
+        text-shadow: 0 0 10px rgb(88, 228, 60), 0 0 20px rgb(88, 228, 60), 0 0 30px rgb(88, 228, 60), 0 0 40px rgb(88, 228, 60), 0 0 50px rgb(88, 228, 60), 0 0 60px rgb(88, 228, 60), 0 0 70px rgb(88, 228, 60);
+    }
+}
+
+.sleepyText{
+    top: 18%;
+    left: 85%;
+    color: white;
+    transform: rotate(1deg);
+    animation: glowSleepy 1s ease-in-out infinite alternate;
+    display: none;
+}
+
+@keyframes glowSleepy {
     from {
         text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6, 0 0 25px #0073e6, 0 0 30px #0073e6, 0 0 35px #0073e6;
     }
@@ -197,9 +292,6 @@ body {
         text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #0073e6, 0 0 40px #0073e6, 0 0 50px #0073e6, 0 0 60px #0073e6, 0 0 70px #0073e6;
     }
 }
-
-
-
 
 .cloud {
     z-index: 2000;

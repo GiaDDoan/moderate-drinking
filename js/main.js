@@ -7,7 +7,18 @@ const background = document.querySelector('.background');
 const titleDiv = document.querySelector('.titleDiv');
 background.src = 'images/office.png'; //BACKGROUND
 const cloudDrunk = document.querySelector('.cloud');
+const app = document.querySelector('#app');
 
+//Drunkness stages
+const tipsyText = document.querySelector('.tipsyText');
+const reverseMoveText = document.querySelector('.reverseMoveText');
+const cloudText = document.querySelector('.cloudText');
+const reverseScreenText = document.querySelector('.reverseScreenText');
+const sleepyText = document.querySelector('.sleepyText');
+const lid = document.querySelector('.lid');
+
+const audio = new Audio('./audio/lofi.mp3');
+audio.volume = 0.2;
 
 // keydownHandler is a variable that refers to a function. The function has one parameter
 // (does the parameter name matter?) which is called event. As we will see below, this function
@@ -53,6 +64,7 @@ startButton.addEventListener('click', () => {
   gameEngine.live.domElement.style.display = 'block';
   gameEngine.gameLoop();
   background.src = 'images/background.jpg'; //BACKGROUND
+  audio.play()
 });
 
 restartButton.addEventListener('click', () => {
@@ -64,3 +76,12 @@ restartButton.addEventListener('click', () => {
   gameEngine.player.domElement.className = 'playerChar';
   document.addEventListener('keydown', keydownHandler);
 });
+
+// const audio = document.querySelector('.backgroundSound');
+// console.log(audio);
+
+// window.addEventListener("DOMContentLoaded", () => {
+//   audio.volume = 0.2;
+//   setTimeout(() => {
+//     audio.play()}, 1000);
+// })

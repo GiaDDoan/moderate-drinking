@@ -17,7 +17,7 @@ class Engine {
     this.startTime = null;
     this.score = new Text(this.root, 10, 10);
     this.live = new Text(this.root, 810, 10);
-    this.numberOfLives = 5;
+    this.numberOfLives = NUMBER_OF_LIFES;
     this.invincible = false;
     // this.highscore = 0;
     this.score.update(0);
@@ -92,15 +92,15 @@ class Engine {
     // and return from the method (Why is the return statement important?)
 
     if (this.isPlayerDead() && !this.invincible) {
-      if (this.enemies.forEach((enemy) => {
-        if (enemy.domElement.src === './images/water.png'){
-          return true;
-        }
-      })){
-        this.numberOfLives += 1;
-        this.live.update(`Drinks until drunk: ${this.numberOfLives}`);
-      }
-      else if (this.numberOfLives > 1) {
+      // if (this.enemies.forEach((enemy) => {
+      //   if (enemy.domElement.src === './images/water.png'){
+      //     return true;
+      //   }
+      // })){
+      //   this.numberOfLives += 1;
+      //   this.live.update(`Drinks until drunk: ${this.numberOfLives}`);
+      // }
+      if (this.numberOfLives > 1) {
         this.numberOfLives -= 1;
         this.live.update(`Drinks until drunk: ${this.numberOfLives}`);
         this.invincible = true;
@@ -116,7 +116,9 @@ class Engine {
         restartButton.style.display = 'block';
         this.player.domElement.src = 'images/cat1.png';
         this.player.domElement.className = 'catChar';
-        document.removeEventListener('keydown', keydownHandler);
+        app.style.removeProperty('transform');
+        lid.style.removeProperty('animation');
+        document.removeEventListener('keydown', keydownHandlerReverse);
         this.live.update(`Drinks until blackout: \n Where am I?`);
         this.invincible = true
         return
@@ -124,33 +126,60 @@ class Engine {
     }
 
     if (this.invincible) {
-      this.player.domElement.style.border = 'red 2px solid';
+      this.player.domElement.style.animation = 'invincibility 0.5s ease-in-out alternate infinite';
     } else {
-      this.player.domElement.style.border = 'none';
+      this.player.domElement.style.removeProperty('animation');
     }
 
     //Drunkness disbilities
+    if (this.numberOfLives <= 5) {
+      app.style.animation = 'tipsyApp 1s ease-in-out alternate infinite'; //Transform
+      tipsyText.style.display = 'block';
+    } else {
+      app.style.removeProperty('animation');
+      tipsyText.style.display = 'none';
+
+    }
+
     if (this.numberOfLives <= 4){
       document.removeEventListener('keydown', keydownHandler);
       document.addEventListener('keydown', keydownHandlerReverse);
+      reverseMoveText.style.display = 'block';
     } else {
       document.removeEventListener('keydown', keydownHandlerReverse);
       document.addEventListener('keydown', keydownHandler);
+      reverseMoveText.style.display = 'none';
     }
 
     if (this.numberOfLives <= 3){
       cloudDrunk.style.display = 'block';
+      cloudText.style.display = 'block';
     } else {
       cloudDrunk.style.display = 'none';
+      cloudText.style.display = 'none';
     }
-    // if (this.numberOfLives <= 4) {
-    //   document.removeEventListener('keydown', keydownHandler);
-    //   document.addEventListener('keydown', keydownHandlerReverse);
-    // } else if (this.numberOfLives <= 3){
-    //   cloudDrunk.style.display = 'block';
-    // } else {
-    //   cloudDrunk.style.display = 'none';
-    // }
+
+    if (this.numberOfLives <= 2){
+      reverseScreenText.style.display = 'block';
+      app.style.removeProperty('animation');
+      app.style.transform = "rotate(180deg)";
+      document.removeEventListener('keydown', keydownHandlerReverse);
+      document.addEventListener('keydown', keydownHandler);
+    } else {
+      reverseScreenText.style.display = 'none';
+      app.style.removeProperty('transform');
+    }
+
+    if (this.numberOfLives <= 1){
+      sleepyText.style.display = 'block';
+      lid.style.display = 'block';
+      lid.style.animation = 'closingUp 0.7s ease-in-out alternate infinite';
+    } else {
+      sleepyText.style.display = 'none';
+      lid.style.display = 'none';
+      lid.style.removeProperty('animation');
+    }
+
 
 
     // If the player is not dead, then we put a setTimeout to run the gameLoop in 20 milliseconds
@@ -163,8 +192,18 @@ class Engine {
     let isCollision = false;
     
     this.enemies.forEach((enemy) => {
-      if (enemy.x === this.player.x && enemy.y >= (GAME_HEIGHT - PLAYER_HEIGHT - ENEMY_HEIGHT)) {
-        isCollision = true;
+      // if (enemy.x === this.player.x && enemy.y >= (GAME_HEIGHT - PLAYER_HEIGHT - ENEMY_HEIGHT) && enemy.domElement.src === WATER) {
+      if (enemy.x === this.player.x && enemy.y >= (GAME_HEIGHT - PLAYER_HEIGHT - ENEMY_HEIGHT) && enemy.hasAlreadyHit === false) {
+        enemy.hasAlreadyHit = true;
+        if(enemy.bottleType === WATER){
+          if(this.numberOfLives <= 5){
+            this.numberOfLives += 1;
+          } else {
+            this.numberOfLives += 0;
+          }
+        } else {
+          isCollision = true;
+        }
       }
     })
     return isCollision;
@@ -172,7 +211,7 @@ class Engine {
   restart = () => {
     this.startTime = null;
     this.score.update(0);
-    this.numberOfLives = 5;
+    this.numberOfLives = NUMBER_OF_LIFES;
     // cloudDrunk.style.display = 'none';
     this.invincible = true;
     setTimeout(() => {

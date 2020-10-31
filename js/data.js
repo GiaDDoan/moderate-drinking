@@ -21,3 +21,13 @@ const MAX_ENEMIES = 4;
 // const PLAYER_HEIGHT = 54;
 const PLAYER_WIDTH = 100;
 const PLAYER_HEIGHT = 100;
+
+//DRINKS
+const WHISKEY = './images/whiskey.png';
+const BEER = './images/beer1.png';
+const WINE = './images/wine1.png';
+const SAKE = './images/sake1.png';
+const WATER = './images/water.png';
+
+//
+const NUMBER_OF_LIFES = 6;
